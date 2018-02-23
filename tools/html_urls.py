@@ -7,6 +7,9 @@
 
 from BeautifulSoup import BeautifulSoup
 import sys
+# 检查标准输出流的编码  
+# print u"sys.stdout.encoding:%s" % sys.stdout.encoding  # 设置 $LANG = zh_CN.GBK，  输出 GBK  
+                           # 设置 $LANG = en_US.UTF-8，输出 UTF-8  
 import re
 import urllib2
 import base64
@@ -74,8 +77,14 @@ def main(url,bQuick):
 		content = url_to_body(url)
 	soup = BeautifulSoup(content)
 	links = urls(soup, content)
+	count = 0
 	for link in links:
-		print link
+		try:
+			count = count + 1
+			print link.decode('utf-8')
+		except Exception as e:
+			print "decode error:{e},count={c}".format(e=e, c=count)
+			break
 		# if re.match(r'^thunder://', link):
 		# 	print decode_thunder(link)
 		# break
