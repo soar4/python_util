@@ -16,6 +16,7 @@ import base64
 
 baseFilter = [r'^thunder://', r'^ftp://', r'^ed2k://', r'^magnet:']
 g_dl_html = './dl.html'
+charset = 'utf-8'
 
 def download(url):
 	try:
@@ -78,13 +79,14 @@ def main(url,bQuick):
 	soup = BeautifulSoup(content)
 	links = urls(soup, content)
 	count = 0
+
 	for link in links:
 		try:
 			count = count + 1
-			print link.decode('utf-8')
+			print link.encode('utf-8')
 		except Exception as e:
 			print "decode error:{e},count={c}".format(e=e, c=count)
-			break
+			continue	
 		# if re.match(r'^thunder://', link):
 		# 	print decode_thunder(link)
 		# break

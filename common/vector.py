@@ -34,13 +34,19 @@ class Vector(object):
     def __add__(self, v):
         return self.plus(v)
 
+    def __getitem__(self, *args):
+        return self.coordinates.__getitem__(*args)
+
+    def __iter__(self, *args):
+        return self.coordinates.__iter__(*args)
+
     def plus(self, v):
         new_coordinates = [x+y for x,y in zip(self.coordinates, v.coordinates)]
-        return new_coordinates
+        return Vector(new_coordinates)
 
     def minus(self, v):
         new_coordinates = [x-y for x,y in zip(self.coordinates, v.coordinates)]
-        return new_coordinates
+        return Vector(new_coordinates)
 
     def times_scalar(self, c):
         new_coordinates = [Decimal(c)*x for x in self.coordinates]
