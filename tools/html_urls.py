@@ -56,11 +56,11 @@ def urls(soup, content):
 
 
 def decode_thunder(thunder_url):
-	b64 = thunder_url[12:len(thunder_url)-2]
+	b64 = thunder_url[10:]
 	print "org:", thunder_url
 	print "b64:", b64
 	deb64 = base64.b64decode(b64)
-	return deb64
+	return deb64[2:len(deb64)-2]
 
 def url_to_body(url):
 	body = download(url)
